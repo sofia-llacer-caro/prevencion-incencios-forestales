@@ -9,7 +9,7 @@
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="no-js">
 
 <!-- ============ SPRITE DE ICONOS SVG (inline para funcionar offline y en file://) ============ -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -126,8 +126,15 @@
 
 <main id="inicio">
 
+  <!-- Barra de resultado: aparece cuando el flujo de preguntas filtra la guía -->
+  <div id="result-bar" class="result-bar" hidden>
+    <a href="#/inicio">← Inicio</a>
+    <span id="result-label"></span>
+    <a href="#/todo">Ver guía completa</a>
+  </div>
+
   <!-- ============ 0 · PORTADA / HERO ============ -->
-  <section class="hero">
+  <section class="hero" data-flow="inicio todo">
     <p class="lang-note" lang="en">Guía solo en español por ahora · <span>Available in English &amp; Valencià soon</span></p>
     <h1>Aras de los Olmos está en zona de riesgo de incendio forestal.</h1>
     <p class="hero-lead">Si vienes este verano, dedica <strong>3&nbsp;minutos</strong> a leer esto. Puede salvarte la vida a ti o a alguien más.</p>
@@ -135,25 +142,71 @@
       <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
       Emergencias: LLAMA AL 112
     </a>
+  </section>
 
-    <div class="quick-select" aria-label="Acceso rápido según tu situación">
-      <h2>¿Qué te pasa ahora mismo?</h2>
-      <div class="quick-buttons">
-        <a class="quick-btn quick-btn-danger" href="#veo-humo">
-          <svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>
-          Veo humo o fuego
-        </a>
-        <a class="quick-btn" href="#monte">
-          <svg class="icon" aria-hidden="true"><use href="#i-trees"/></svg>
-          Estoy en el monte
-        </a>
-        <a class="quick-btn" href="#coche">
-          <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
-          Estoy en casa o en el coche
-        </a>
-      </div>
+  <!-- ============ FLUJO GUIADO · Pregunta 1 ============ -->
+  <section id="q-inicio" class="flow-screen" data-flow="inicio">
+    <h2>¿Qué necesitas ahora mismo?</h2>
+    <div class="quick-buttons">
+      <a class="quick-btn quick-btn-danger" href="#/emergencia">
+        <svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>
+        Veo humo o fuego
+      </a>
+      <a class="quick-btn" href="#/donde">
+        <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+        Hay un incendio activo cerca de mí
+      </a>
+      <a class="quick-btn" href="#/quien">
+        <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+        Quiero informarme y prevenir
+      </a>
     </div>
+    <p class="flow-alt"><a href="#/todo">O lee la guía completa de arriba abajo →</a></p>
+  </section>
 
+  <!-- ============ FLUJO GUIADO · Pregunta 2: ¿dónde estás? ============ -->
+  <section id="q-donde" class="flow-screen" data-flow="donde">
+    <p class="crumb"><a href="#/inicio">← Inicio</a></p>
+    <h2>¿Dónde estás ahora mismo?</h2>
+    <div class="quick-buttons">
+      <a class="quick-btn" href="#/monte">
+        <svg class="icon" aria-hidden="true"><use href="#i-trees"/></svg>
+        En el monte, a pie
+      </a>
+      <a class="quick-btn" href="#/coche">
+        <svg class="icon" aria-hidden="true"><use href="#i-car"/></svg>
+        En el coche
+      </a>
+      <a class="quick-btn" href="#/casa">
+        <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+        En una casa o casa de campo
+      </a>
+    </div>
+    <p class="flow-alt">¿Aún no has avisado del fuego? <a href="#/emergencia">Llama primero al 112 →</a></p>
+  </section>
+
+  <!-- ============ FLUJO GUIADO · Pregunta 3: ¿cuál es tu caso? ============ -->
+  <section id="q-quien" class="flow-screen" data-flow="quien">
+    <p class="crumb"><a href="#/inicio">← Inicio</a></p>
+    <h2>¿Cuál es tu caso?</h2>
+    <div class="quick-buttons">
+      <a class="quick-btn" href="#/visita">
+        <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+        Vengo de visita o de excursión este verano
+      </a>
+      <a class="quick-btn" href="#/eclipse-info">
+        <svg class="icon" aria-hidden="true"><use href="#i-eclipse"/></svg>
+        Vengo a ver el eclipse del 12 de agosto de 2026
+      </a>
+      <a class="quick-btn" href="#/pueblo">
+        <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+        Soy del pueblo o tengo casa aquí
+      </a>
+    </div>
+  </section>
+
+  <!-- Contexto general: solo en portada y guía completa -->
+  <section class="hero-context" data-flow="inicio todo">
     <div class="context-box">
       <p><strong>Dato de contexto</strong> (Ministerio del Interior): en España se producen de media unos <strong>17.000 incendios forestales al año</strong>, la mayoría menores de 1&nbsp;hectárea, y unos 80 al año llegan a afectar a la población.</p>
       <p>Aras de los Olmos (comarca de Los Serranos, Valencia, 936&nbsp;m de altitud) tiene importante superficie forestal alrededor del casco urbano. El ayuntamiento ha ejecutado obras de prevención (limpieza de caminos forestales, biotrituradora) dentro del programa REACCIONA de la Diputación de Valencia.</p>
@@ -161,7 +214,7 @@
   </section>
 
   <!-- ============ 1 · ANTES DE VENIR ============ -->
-  <section id="antes">
+  <section id="antes" data-flow="visita eclipse-info todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Antes de venir / antes de salir de casa</h2>
     <ul class="card-list checklist">
       <li>Consulta el nivel de preemergencia PREVIFOC del día en <a href="https://www.112cv.gva.es" rel="noopener">www.112cv.gva.es</a>.</li>
@@ -173,7 +226,7 @@
   </section>
 
   <!-- ============ 2 · QUÉ NO HACER ============ -->
-  <section id="no-hacer" class="section-alert">
+  <section id="no-hacer" class="section-alert" data-flow="visita eclipse-info pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg>Qué NO hacer nunca</h2>
     <ul class="ban-list">
       <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span><strong>PROHIBIDO</strong> encender fuego en el monte con ninguna finalidad, ni siquiera hogueras pequeñas.</span></li>
@@ -186,7 +239,7 @@
   </section>
 
   <!-- ============ 3 · PRINCIPIOS GENERALES ============ -->
-  <section id="reglas" class="section-rules">
+  <section id="reglas" class="section-rules" data-flow="monte coche casa visita pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Principios generales de supervivencia</h2>
     <p class="section-sub">Las reglas de oro. Valen en cualquier situación.</p>
     <ol class="golden-rules">
@@ -204,7 +257,7 @@
   </section>
 
   <!-- ============ 4 · SI VEO HUMO O FUEGO ============ -->
-  <section id="veo-humo" class="section-critical">
+  <section id="veo-humo" class="section-critical" data-flow="emergencia todo">
     <p class="critical-tag"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>URGENTE · La sección más importante</p>
     <h2><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>Si veo humo o fuego</h2>
 
@@ -254,10 +307,18 @@
         </ul>
       </div>
     </div>
+
+    <div class="only-emergencia">
+      <h3>¿Ya has avisado? Siguiente paso:</h3>
+      <a class="quick-btn" href="#/donde">
+        <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+        El fuego está cerca de mí: ¿qué hago donde estoy?
+      </a>
+    </div>
   </section>
 
   <!-- ============ 5 · EN EL MONTE A PIE ============ -->
-  <section id="monte">
+  <section id="monte" data-flow="monte todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-trees"/></svg>Si estoy en el monte a pie y el incendio está cerca</h2>
     <ul class="card-list">
       <li>Observa constantemente la <strong>dirección del viento</strong>: puede cambiar y con ella la dirección del fuego.</li>
@@ -273,7 +334,7 @@
   </section>
 
   <!-- ============ 6 · TERRENO PELIGROSO ============ -->
-  <section id="terreno" class="section-terrain">
+  <section id="terreno" class="section-terrain" data-flow="monte visita todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-ravine"/></svg>Terreno peligroso: barrancos, vaguadas, collados y laderas</h2>
     <p class="section-sub">Peligro del terreno, no solo del fuego directo. Aquí el fuego corre más que tú.</p>
 
@@ -309,7 +370,7 @@
   </section>
 
   <!-- ============ 7 · EN EL COCHE ============ -->
-  <section id="coche">
+  <section id="coche" data-flow="coche todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-car"/></svg>Si estoy conduciendo y me rodea el humo o el fuego</h2>
     <ul class="card-list">
       <li><strong>No conduzcas a ciegas a través de humo denso:</strong> enciende luces e intermitentes.</li>
@@ -319,7 +380,7 @@
   </section>
 
   <!-- ============ 8 · EN CASA O CASA DE CAMPO ============ -->
-  <section id="casa">
+  <section id="casa" data-flow="casa pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Si estoy en una vivienda o casa de campo cercana a un incendio</h2>
     <div class="two-cols">
       <div class="col-card">
@@ -350,7 +411,7 @@
   </section>
 
   <!-- ============ 9 · COMPORTAMIENTO DEL FUEGO ============ -->
-  <section id="fuego">
+  <section id="fuego" data-flow="visita monte todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg>Comprende a tu enemigo: el comportamiento del fuego</h2>
     <div class="fire-grid">
       <div class="fire-card">
@@ -387,7 +448,7 @@
   </section>
 
   <!-- ============ 10 · ERRORES FRECUENTES ============ -->
-  <section id="errores" class="section-alert">
+  <section id="errores" class="section-alert" data-flow="visita pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Errores frecuentes que cuestan vidas</h2>
     <div class="errors-grid">
       <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Esperar «a ver qué pasa» en vez de actuar o evacuar pronto.</p></div>
@@ -401,7 +462,7 @@
   </section>
 
   <!-- ============ 11 · ECLIPSE 2026 ============ -->
-  <section id="eclipse" class="section-eclipse">
+  <section id="eclipse" class="section-eclipse" data-flow="eclipse-info todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-eclipse"/></svg>Si vienes a ver el eclipse solar del 12 de agosto de 2026</h2>
     <p>El 12 de agosto de 2026, al atardecer (en torno a las 20:30h), se producirá el <strong>primer eclipse solar total visible desde la península en más de un siglo</strong>, y pasará por gran parte de la Comunitat Valenciana. Aras de los Olmos, por sus cielos oscuros y su tradición de turismo astronómico (observatorios, Reserva de la Biosfera), es probable que reciba ese día bastante gente buscando un buen sitio para verlo hacia el oeste. Esto coincide justo con el <strong>periodo de mayor riesgo de incendio del año</strong>, así que ten en cuenta también:</p>
     <ul class="card-list">
@@ -415,7 +476,7 @@
   </section>
 
   <!-- ============ 12 · NIVELES PREVIFOC ============ -->
-  <section id="niveles">
+  <section id="niveles" data-flow="visita eclipse-info pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Niveles de riesgo (PREVIFOC) y dónde consultarlos</h2>
     <div class="levels-table" role="table" aria-label="Niveles de preemergencia PREVIFOC">
       <div class="level-row level-1" role="row">
@@ -435,7 +496,7 @@
   </section>
 
   <!-- ============ 13 · TELÉFONOS ============ -->
-  <section id="telefonos">
+  <section id="telefonos" data-flow="emergencia monte coche casa visita eclipse-info pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Teléfonos y contactos útiles</h2>
     <div class="phones-grid">
       <a class="phone-card phone-card-112" href="tel:112">
@@ -465,7 +526,7 @@
   </section>
 
   <!-- ============ 14 · VÍAS DE EVACUACIÓN ============ -->
-  <section id="evacuacion">
+  <section id="evacuacion" data-flow="casa pueblo todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Vías de evacuación y puntos de encuentro</h2>
     <div class="pending-box pending-box-big">
       <p><strong>PENDIENTE DE CONFIRMAR POR EL AYUNTAMIENTO</strong> con el Plan de Autoprotección o Plan Local de Emergencias del municipio (si existe). Como mínimo debería incluir:</p>
@@ -484,7 +545,7 @@
   </section>
 
   <!-- ============ 15 · NORMATIVA Y FUENTES ============ -->
-  <section id="normativa" class="section-small">
+  <section id="normativa" class="section-small" data-flow="todo">
     <h2><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>Normativa y fuentes</h2>
     <h3>Normativa de referencia</h3>
     <ul>

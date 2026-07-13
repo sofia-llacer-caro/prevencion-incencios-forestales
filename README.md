@@ -5,6 +5,13 @@ frente a incendios forestales para visitantes de Aras de los Olmos (Valencia).
 Sin frameworks, sin build step, sin analytics: HTML + CSS + JS vanilla.
 Funciona **sin conexión** después de la primera visita (service worker).
 
+La portada es un **flujo guiado de preguntas**: "¿Qué necesitas ahora mismo?"
+→ *Veo humo o fuego* / *Hay un incendio cerca* (→ ¿dónde estás?: monte, coche,
+casa) / *Quiero informarme* (→ ¿cuál es tu caso?: visitante, eclipse 2026,
+soy del pueblo). Cada respuesta muestra solo las secciones relevantes, con un
+enlace permanente a la guía completa. Sin JavaScript (o al imprimir) se ve la
+guía entera de arriba abajo.
+
 ## Probar en local
 
 Doble clic en `index.html` y listo. Todo funciona igual, salvo dos cosas que
@@ -41,6 +48,7 @@ app.netlify.com/drop) o en **Cloudflare Pages**.
 | Quiero cambiar…                                | Toca este archivo |
 |------------------------------------------------|-------------------|
 | Textos, teléfonos, secciones, enlaces           | `index.html` (todo el contenido está ahí, en HTML plano) |
+| Qué secciones ve cada respuesta del flujo       | `index.html`: el atributo `data-flow` de cada `<section>` lista las vistas donde aparece (`emergencia`, `monte`, `coche`, `casa`, `visita`, `eclipse-info`, `pueblo`, `todo`). Añade o quita nombres de vista ahí. Las etiquetas de la barra superior están en el objeto `VIEWS` de `app.js`. |
 | Colores, tipografía, espaciados                 | `styles.css` (los colores están en las variables `:root` del principio) |
 | Botón de coordenadas GPS, tamaño de texto       | `app.js` |
 | Iconos                                          | El "sprite" de símbolos SVG al principio de `index.html` (los archivos de `icons/` son copias sueltas de referencia; el favicon es `icons/favicon.svg`) |

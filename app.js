@@ -3,6 +3,66 @@
 (function () {
   "use strict";
 
+  document.body.classList.remove("no-js");
+
+  /* ============ 0. Flujo guiado: rutas por hash (#/vista) ============ */
+  // Cada sección lleva data-flow="vista1 vista2..." con las vistas donde se
+  // muestra. Las rutas "#/x" filtran la guía; los anclajes normales "#seccion"
+  // abren la guía completa y saltan a esa sección. Sin JS se ve todo seguido.
+
+  var VIEWS = {
+    // pantallas de preguntas
+    inicio: null,
+    donde: null,
+    quien: null,
+    // vistas de contenido filtrado (etiqueta para la barra superior)
+    emergencia: "Emergencia: veo humo o fuego",
+    monte: "Estás en el monte a pie",
+    coche: "Estás en el coche",
+    casa: "Estás en una casa",
+    visita: "Vienes de visita este verano",
+    "eclipse-info": "Vienes a ver el eclipse de 2026",
+    pueblo: "Eres del pueblo o tienes casa aquí",
+    todo: "Guía completa"
+  };
+
+  var flowEls = document.querySelectorAll("main [data-flow]");
+  var resultBar = document.getElementById("result-bar");
+  var resultLabel = document.getElementById("result-label");
+
+  function route() {
+    var hash = location.hash;
+    var view = "inicio";
+    var anchor = null;
+
+    if (hash.indexOf("#/") === 0 && VIEWS.hasOwnProperty(hash.slice(2))) {
+      view = hash.slice(2);
+    } else if (hash.length > 1) {
+      // Anclaje normal (nav superior o enlaces internos): guía completa + salto.
+      view = "todo";
+      anchor = document.getElementById(hash.slice(1));
+    }
+
+    document.body.setAttribute("data-view", view);
+    for (var i = 0; i < flowEls.length; i++) {
+      var el = flowEls[i];
+      el.hidden = (" " + el.getAttribute("data-flow") + " ").indexOf(" " + view + " ") === -1;
+    }
+
+    var label = VIEWS[view];
+    resultBar.hidden = !label;
+    if (label) resultLabel.textContent = label;
+
+    if (anchor) {
+      anchor.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  window.addEventListener("hashchange", route);
+  route();
+
   /* ============ 1. Tamaño de texto ajustable (persistente) ============ */
 
   var FONT_SIZES = [100, 112.5, 125, 140, 160]; // % sobre 16px; 112.5% es el valor por defecto

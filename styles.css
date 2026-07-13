@@ -32,6 +32,10 @@
 
 * { box-sizing: border-box; }
 
+/* El atributo hidden (usado por el flujo guiado) manda siempre,
+   aunque el elemento tenga display flex/grid en otra regla. */
+[hidden] { display: none !important; }
+
 html {
   font-size: 112.5%;                 /* 18px base: tipografía grande */
   scroll-behavior: smooth;
@@ -261,8 +265,43 @@ h3 { font-size: 1.15rem; margin: 0 0 0.5rem; }
 
 .hero-lead { font-size: 1.2rem; max-width: 34rem; }
 
-.quick-select { margin: 2.25rem 0; }
-.quick-select h2 { font-size: 1.25rem; }
+/* ---------- flujo guiado de preguntas ---------- */
+
+/* Sin JavaScript no hay flujo: se ocultan las preguntas y se ve la guía entera */
+.no-js .flow-screen,
+.no-js .result-bar,
+.no-js .only-emergencia { display: none !important; }
+
+.flow-screen { margin: 2rem 0 2.5rem; }
+.flow-screen h2 { font-size: clamp(1.3rem, 4vw + 0.5rem, 1.6rem); }
+
+.crumb { margin: 0 0 0.25rem; font-size: 0.85rem; }
+.crumb a { font-weight: 700; text-decoration: none; }
+.crumb a:hover, .crumb a:focus-visible { text-decoration: underline; }
+
+.flow-alt { font-size: 0.92rem; color: var(--ink-soft); margin-top: 1.25rem; }
+
+.result-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  margin: 1rem 0 0;
+  font-size: 0.85rem;
+}
+.result-bar a { font-weight: 750; text-decoration: none; }
+.result-bar a:hover, .result-bar a:focus-visible { text-decoration: underline; }
+.result-bar a:last-child { margin-left: auto; }
+#result-label { color: var(--ink-soft); font-weight: 650; }
+
+/* Bloque "siguiente paso" visible solo dentro del flujo de emergencia */
+.only-emergencia { display: none; margin-top: 1.25rem; }
+body[data-view="emergencia"] .only-emergencia { display: block; }
+.only-emergencia h3 { color: var(--danger); }
 
 .quick-buttons {
   display: grid;
