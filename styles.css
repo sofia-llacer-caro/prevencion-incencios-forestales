@@ -1,0 +1,777 @@
+/* ==========================================================================
+   Guía de incendios forestales · Aras de los Olmos
+   Mobile-first, alto contraste, sin animaciones. Paleta reducida:
+   - tinta casi negra sobre fondo claro cálido (legible a pleno sol)
+   - ámbar oscuro   = alerta / prohibición
+   - rojo profundo  = SOLO peligro extremo (sección "veo humo", nivel 3)
+   ========================================================================== */
+
+:root {
+  --bg: #faf7f2;            /* fondo claro cálido */
+  --surface: #ffffff;
+  --ink: #1c1a17;           /* texto principal */
+  --ink-soft: #4c473f;      /* texto secundario */
+  --line: #d9d2c7;          /* bordes suaves */
+
+  --alert: #9a4a00;         /* ámbar/naranja oscuro: alerta seria sin pánico */
+  --alert-bg: #fdf1e3;
+  --alert-line: #d98c33;
+
+  --danger: #8c1616;        /* rojo profundo: reservado a lo más urgente */
+  --danger-bg: #fbecea;
+
+  --ok: #1d6b34;            /* verde: solo nivel 1 PREVIFOC */
+  --ok-bg: #e9f4ec;
+
+  --eclipse: #2e3660;       /* azul crepúsculo: solo sección eclipse */
+  --eclipse-bg: #eef0f8;
+
+  --radius: 12px;
+  --header-h: 8.75rem;      /* referencia para scroll-margin de anclas */
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 112.5%;                 /* 18px base: tipografía grande */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- utilidades ---------- */
+
+.icon {
+  width: 1.35em;
+  height: 1.35em;
+  flex: 0 0 auto;
+  vertical-align: -0.28em;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--danger);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  z-index: 200;
+  font-weight: 700;
+}
+.skip-link:focus { left: 0; }
+
+a { color: var(--alert); }
+a:hover, a:focus-visible { color: var(--ink); }
+
+strong { font-weight: 750; }
+
+/* ==========================================================================
+   Cabecera fija: botón 112 siempre visible + nav de anclas
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 2px solid var(--line);
+  box-shadow: 0 1px 6px rgba(28, 26, 23, 0.12);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.72rem;
+  line-height: 1.25;
+  min-width: 0;
+}
+.brand .icon { color: var(--alert); width: 1.6em; height: 1.6em; }
+.brand strong { font-size: 1.1em; }
+
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.font-controls { display: flex; gap: 0.25rem; }
+.font-controls button {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--ink-soft);
+  border-radius: 8px;
+  min-width: 2.4rem;
+  min-height: 2.4rem;
+  cursor: pointer;
+}
+.font-controls button:hover,
+.font-controls button:focus-visible { background: var(--bg); border-color: var(--ink); }
+
+/* Botón 112: el elemento más visible de toda la página */
+.btn-112 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--danger);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  border: 2px solid var(--danger);
+}
+.btn-112:hover, .btn-112:focus-visible {
+  background: #6e1010;
+  color: #fff;
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.btn-112-hero {
+  font-size: 1.15rem;
+  padding: 0.9rem 1.6rem;
+  margin: 1rem 0 0;
+}
+
+/* Navegación por anclas: fila desplazable, icono + texto corto */
+.anchor-nav {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding: 0.45rem 0.75rem 0.6rem;
+  max-width: 62rem;
+  margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.anchor-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 650;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+}
+.anchor-nav a:hover, .anchor-nav a:focus-visible {
+  border-color: var(--alert);
+  color: var(--alert);
+}
+.anchor-nav .icon { width: 1.1em; height: 1.1em; }
+
+/* Primer chip (Veo humo) destacado */
+.anchor-nav a:first-child {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+.anchor-nav a:first-child:hover,
+.anchor-nav a:first-child:focus-visible { background: #6e1010; color: #fff; }
+
+/* ==========================================================================
+   Estructura general
+   ========================================================================== */
+
+main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+section {
+  margin: 2.75rem 0;
+  scroll-margin-top: var(--header-h);
+}
+
+h1 {
+  font-size: clamp(1.7rem, 5.5vw + 0.5rem, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0.5rem 0;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.35rem, 3.5vw + 0.5rem, 1.75rem);
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+h2 .icon { color: var(--alert); }
+
+h3 { font-size: 1.15rem; margin: 0 0 0.5rem; }
+
+.section-sub {
+  margin: -0.5rem 0 1.25rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ---------- hero ---------- */
+
+.hero { margin-top: 1.5rem; }
+
+.lang-note {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: inline-block;
+  padding: 0.25rem 0.8rem;
+  margin: 0 0 0.75rem;
+}
+
+.hero-lead { font-size: 1.2rem; max-width: 34rem; }
+
+.quick-select { margin: 2.25rem 0; }
+.quick-select h2 { font-size: 1.25rem; }
+
+.quick-buttons {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 750;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  min-height: 3.6rem;
+}
+.quick-btn:hover, .quick-btn:focus-visible {
+  background: var(--bg);
+  color: var(--ink);
+  outline: 3px solid var(--alert);
+  outline-offset: 2px;
+}
+.quick-btn .icon { width: 1.6em; height: 1.6em; color: var(--alert); }
+
+.quick-btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+.quick-btn-danger .icon { color: #fff; }
+.quick-btn-danger:hover, .quick-btn-danger:focus-visible {
+  background: #6e1010;
+  color: #fff;
+}
+
+.context-box {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.context-box p:first-child { margin-top: 0; }
+.context-box p:last-child { margin-bottom: 0; }
+
+/* ---------- listas de tarjetas genéricas ---------- */
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.card-list li {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.1rem;
+}
+
+.checklist li { border-left: 5px solid var(--alert); }
+
+/* ==========================================================================
+   Qué NO hacer + errores (fondo ámbar de alerta)
+   ========================================================================== */
+
+.section-alert {
+  background: var(--alert-bg);
+  border: 2px solid var(--alert-line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.1rem 1.4rem;
+}
+.section-alert h2 { color: var(--alert); }
+.section-alert h2 .icon { color: var(--alert); }
+
+.ban-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.ban-list li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1.5px solid var(--alert-line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+}
+.ban-list .icon { color: var(--alert); width: 1.5em; height: 1.5em; margin-top: 0.1em; }
+
+/* ==========================================================================
+   Reglas de oro (fondo distinto, lista numerada grande)
+   ========================================================================== */
+
+.section-rules {
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem 1.6rem;
+}
+.section-rules h2, .section-rules h2 .icon { color: var(--bg); }
+.section-rules .section-sub { color: #cfc8bc; }
+
+.golden-rules {
+  list-style: none;
+  counter-reset: rule;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.golden-rules li {
+  counter-increment: rule;
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+  font-size: 1.05rem;
+  border-bottom: 1px solid rgba(250, 247, 242, 0.22);
+  padding-bottom: 0.85rem;
+}
+.golden-rules li:last-child { border-bottom: none; padding-bottom: 0; }
+.golden-rules li::before {
+  content: counter(rule);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--alert-line);
+  min-width: 1.6rem;
+  text-align: right;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   SI VEO HUMO O FUEGO — la sección más importante (rojo reservado)
+   ========================================================================== */
+
+.section-critical {
+  background: var(--danger-bg);
+  border: 3px solid var(--danger);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.1rem 1.5rem;
+}
+
+.critical-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--danger);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  margin: 0 0 0.75rem;
+}
+
+.section-critical h2, .section-critical h2 .icon { color: var(--danger); }
+
+.big-step {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.step-num {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--danger);
+  min-width: 2.2rem;
+  text-align: center;
+}
+
+.big-step h3 { font-size: 1.3rem; margin-top: 0.1rem; }
+.big-step > div { min-width: 0; flex: 1; }
+.big-step .card-list li { border-left: 4px solid var(--danger); }
+.big-step .btn-112 { margin-top: 0.5rem; }
+
+/* Caja "cómo dar tu ubicación" */
+.location-box {
+  background: var(--bg);
+  border: 2px dashed var(--alert-line);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-top: 0.5rem;
+}
+.location-box h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.05rem;
+  margin: 0 0 0.6rem;
+  color: var(--alert);
+}
+.location-box ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; }
+
+.gps-tool { margin-top: 1rem; }
+
+.btn-gps {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: inherit;
+  font-weight: 750;
+  font-size: 1rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  min-height: 3rem;
+}
+.btn-gps:hover, .btn-gps:focus-visible {
+  outline: 3px solid var(--alert);
+  outline-offset: 2px;
+}
+.btn-gps[disabled] { opacity: 0.6; cursor: wait; }
+
+#gps-result {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  word-break: break-word;
+  min-height: 1em;
+}
+#gps-result.gps-error { color: var(--danger); font-size: 1rem; font-weight: 650; }
+
+.gps-hint { font-size: 0.85rem; color: var(--ink-soft); margin: 0.5rem 0 0; }
+
+/* ==========================================================================
+   Terreno peligroso + esquema SVG
+   ========================================================================== */
+
+.section-terrain h2 .icon { color: var(--danger); }
+
+.slope-diagram {
+  margin: 0 0 1.25rem;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+}
+.slope-diagram svg { width: 100%; height: auto; display: block; }
+.slope-diagram figcaption {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  padding: 0.5rem 0.5rem 0.25rem;
+}
+.diagram-label {
+  font: 800 22px system-ui, sans-serif;
+  fill: var(--ink);
+}
+.diagram-label-danger { fill: var(--danger); }
+
+/* ==========================================================================
+   En casa: dos columnas antes / durante
+   ========================================================================== */
+
+.two-cols { display: grid; gap: 1rem; }
+
+.col-card {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem 1.2rem;
+}
+.col-card h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 0.5rem;
+}
+.col-card .card-list li { border: none; padding: 0 0 0 0.1rem; background: none; border-bottom: 1px solid var(--line); border-radius: 0; padding-bottom: 0.6rem; }
+.col-card .card-list li:last-child { border-bottom: none; }
+
+.col-card-during { border: 2px solid var(--alert-line); }
+.col-card-during h3 { color: var(--alert); border-color: var(--alert-line); }
+
+@media (min-width: 700px) {
+  .two-cols { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==========================================================================
+   Comportamiento del fuego: 6 tarjetas
+   ========================================================================== */
+
+.fire-grid { display: grid; gap: 0.75rem; }
+
+.fire-card {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+.fire-card .icon { width: 1.9em; height: 1.9em; color: var(--alert); }
+.fire-card h3 { margin: 0.4rem 0 0.25rem; font-size: 1.05rem; }
+.fire-card p { margin: 0; font-size: 0.95rem; }
+
+@media (min-width: 560px) {
+  .fire-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 860px) {
+  .fire-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* ==========================================================================
+   Errores frecuentes: rejilla compacta
+   ========================================================================== */
+
+.errors-grid { display: grid; gap: 0.75rem; }
+
+.error-card {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1.5px solid var(--alert-line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+}
+.error-card .icon { color: var(--alert); width: 1.6em; height: 1.6em; margin-top: 0.05em; }
+.error-card p { margin: 0; font-weight: 600; }
+
+@media (min-width: 600px) {
+  .errors-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==========================================================================
+   Eclipse: tono distinto, informativo
+   ========================================================================== */
+
+.section-eclipse {
+  background: var(--eclipse-bg);
+  border: 2px solid var(--eclipse);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.1rem 1.4rem;
+}
+.section-eclipse h2, .section-eclipse h2 .icon { color: var(--eclipse); }
+.section-eclipse .card-list li { border-left: 5px solid var(--eclipse); }
+.section-eclipse a { color: var(--eclipse); text-decoration-thickness: 2px; }
+
+/* ==========================================================================
+   Niveles PREVIFOC
+   ========================================================================== */
+
+.levels-table { display: grid; gap: 0.6rem; margin-bottom: 1rem; }
+
+.level-row {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--line);
+}
+
+.level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #fff;
+  border-radius: 10px;
+  min-width: 5.6rem;
+  padding: 0.5rem 0.4rem;
+  text-align: center;
+  line-height: 1.2;
+  flex: 0 0 auto;
+}
+.level-badge small { font-weight: 650; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+.level-1 { border-left: 6px solid var(--ok); background: var(--ok-bg); }
+.level-1 .level-badge { background: var(--ok); }
+.level-2 { border-left: 6px solid var(--alert); background: var(--alert-bg); }
+.level-2 .level-badge { background: var(--alert); }
+.level-3 { border-left: 6px solid var(--danger); background: var(--danger-bg); }
+.level-3 .level-badge { background: var(--danger); }
+
+/* ==========================================================================
+   Teléfonos: tarjetas grandes tap-to-call
+   ========================================================================== */
+
+.phones-grid { display: grid; gap: 0.75rem; }
+
+.phone-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+.phone-card strong { font-size: 1.7rem; line-height: 1.1; }
+.phone-card span { font-size: 0.9rem; color: var(--ink-soft); }
+.phone-card .icon { color: var(--alert); width: 1.7em; height: 1.7em; }
+a.phone-card:hover, a.phone-card:focus-visible {
+  outline: 3px solid var(--alert);
+  outline-offset: 2px;
+  color: var(--ink);
+}
+
+.phone-card-112 { background: var(--danger); border-color: var(--danger); color: #fff; }
+.phone-card-112 span { color: #f6d9d6; }
+.phone-card-112 .icon { color: #fff; }
+a.phone-card-112:hover, a.phone-card-112:focus-visible { background: #6e1010; color: #fff; }
+
+.phone-card-info { border-style: dashed; border-color: var(--ink-soft); }
+.phone-card-info strong { font-size: 1.1rem; }
+
+@media (min-width: 600px) {
+  .phones-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- bloques pendientes de confirmar ---------- */
+
+.pending-box {
+  margin-top: 1rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--alert-bg),
+    var(--alert-bg) 12px,
+    #fbe6cd 12px,
+    #fbe6cd 24px
+  );
+  border: 2px dashed var(--alert);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+}
+.pending-box p:first-child { margin-top: 0; }
+.pending-box p:last-child, .pending-box ul:last-child { margin-bottom: 0; }
+.pending-box strong:first-child { color: var(--alert); }
+
+.pending-box-big { font-size: 1rem; }
+
+/* ---------- mapa ---------- */
+
+.map-embed { margin-top: 1.25rem; }
+.map-embed iframe {
+  width: 100%;
+  height: 22rem;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  display: block;
+}
+.map-note { font-size: 0.85rem; color: var(--ink-soft); }
+
+/* ---------- normativa y fuentes (discreta) ---------- */
+
+.section-small {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-top: 2px solid var(--line);
+  padding-top: 1.5rem;
+}
+.section-small h2 { font-size: 1.1rem; }
+.section-small h3 { font-size: 0.95rem; margin-top: 1.25rem; }
+.section-small ul { padding-left: 1.2rem; display: grid; gap: 0.35rem; margin: 0.5rem 0; }
+
+/* ---------- pie ---------- */
+
+.site-footer {
+  border-top: 2px solid var(--line);
+  background: var(--surface);
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  padding: 1.5rem 1rem 2.5rem;
+}
+.site-footer a { font-weight: 700; }
+
+/* ---------- pantallas medianas y grandes ---------- */
+
+@media (min-width: 700px) {
+  .brand { font-size: 0.82rem; }
+  .btn-112 { font-size: 0.95rem; }
+  .quick-buttons { grid-template-columns: 1fr 1fr 1fr; }
+  .quick-btn { flex-direction: column; text-align: center; justify-content: center; gap: 0.5rem; padding: 1.4rem 1rem; }
+}
+
+/* ---------- impresión ---------- */
+
+@media print {
+  .site-header, .quick-select, .gps-tool, .map-embed iframe { display: none; }
+  body { background: #fff; }
+  section { break-inside: avoid-page; }
+}

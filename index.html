@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Guía de bolsillo sobre riesgo de incendios forestales para visitantes de Aras de los Olmos (Valencia). Qué hacer si ves humo, cómo llamar al 112 y cómo protegerte. Funciona sin conexión.">
+<meta name="theme-color" content="#faf7f2">
+<title>Incendios forestales · Guía para visitantes · Aras de los Olmos</title>
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ SPRITE DE ICONOS SVG (inline para funcionar offline y en file://) ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/>
+    </symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3 1.07-2.5 1.5-4 3-5 0 2 1.75 3.24 3 4.5 1.25 1.27 2 2.91 2 4.5a6 6 0 0 1-12 0c0-1.15.43-2.28 1-3-.5 1.5 0 3 1.5 4.5z"/>
+    </symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2"/><path d="m8.5 13 2.5 2.5L16 10"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </symbol>
+    <symbol id="i-trees" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2 6.5 11h3L5 18h14l-4.5-7h3L12 2z"/><path d="M12 18v4"/>
+    </symbol>
+    <symbol id="i-ravine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 5 9.5 19 12 14l2.5 5L22 5"/><path d="M12 3v4"/><path d="M12 9.5v.01"/>
+    </symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 11 6.7 6.7A2 2 0 0 1 8.6 5.5h6.8a2 2 0 0 1 1.9 1.2L19 11"/><path d="M3 11h18a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-1"/><path d="M2 12v4a1 1 0 0 0 1 1h1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10z"/><path d="M9 22V12h6v10"/>
+    </symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/><path d="M17.7 7.7A2.5 2.5 0 1 1 19.5 12H2"/>
+    </symbol>
+    <symbol id="i-slope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 20 21 6"/><path d="M14 6h7v7"/><path d="M3 20h18"/>
+    </symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+    </symbol>
+    <symbol id="i-heat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/>
+    </symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.8-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.4 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/>
+    </symbol>
+    <symbol id="i-smoke" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17.5 19a4.5 4.5 0 1 0-1-8.9A6 6 0 1 0 6 15.7"/><path d="M6 19h.01"/><path d="M10 19h.01"/><path d="M14 19h.01"/>
+    </symbol>
+    <symbol id="i-eclipse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="7"/><path d="M12 5a7 7 0 0 1 0 14 9 9 0 0 0 0-14z" fill="currentColor" stroke="none"/><path d="M12 1v1.5"/><path d="M12 21.5V23"/><path d="m4.2 4.2 1.1 1.1"/><path d="m18.7 18.7 1.1 1.1"/><path d="M1 12h1.5"/><path d="M21.5 12H23"/>
+    </symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 14a8 8 0 1 1 16 0"/><path d="M12 14 8.5 9.5"/><path d="M2 18h20"/>
+    </symbol>
+    <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m9 3-6 2v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16"/><path d="M15 5v16"/>
+    </symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/>
+    </symbol>
+    <symbol id="i-locate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3"/><path d="M12 20v3"/><path d="M1 12h3"/><path d="M20 12h3"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/>
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="M12 16v-5"/><path d="M12 8h.01"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#veo-humo">Ir directo a «Veo humo o fuego»</a>
+
+<!-- ============ CABECERA FIJA: 112 + navegación por anclas ============ -->
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="#inicio">
+      <svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>
+      <span><strong>Aras de los Olmos</strong><br>Guía de incendios forestales</span>
+    </a>
+    <div class="topbar-tools">
+      <div class="font-controls" role="group" aria-label="Tamaño del texto">
+        <button type="button" id="font-smaller" aria-label="Texto más pequeño">A−</button>
+        <button type="button" id="font-bigger" aria-label="Texto más grande">A+</button>
+      </div>
+      <a class="btn-112" href="tel:112">
+        <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+        LLAMAR AL 112
+      </a>
+    </div>
+  </div>
+  <nav class="anchor-nav" aria-label="Secciones de la guía">
+    <a href="#veo-humo"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>Veo humo</a>
+    <a href="#monte"><svg class="icon" aria-hidden="true"><use href="#i-trees"/></svg>En el monte</a>
+    <a href="#terreno"><svg class="icon" aria-hidden="true"><use href="#i-ravine"/></svg>Barrancos</a>
+    <a href="#coche"><svg class="icon" aria-hidden="true"><use href="#i-car"/></svg>En coche</a>
+    <a href="#casa"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>En casa</a>
+    <a href="#antes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Antes de venir</a>
+    <a href="#no-hacer"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg>Qué NO hacer</a>
+    <a href="#reglas"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Reglas de oro</a>
+    <a href="#fuego"><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg>El fuego</a>
+    <a href="#errores"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Errores</a>
+    <a href="#eclipse"><svg class="icon" aria-hidden="true"><use href="#i-eclipse"/></svg>Eclipse 2026</a>
+    <a href="#niveles"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Niveles</a>
+    <a href="#telefonos"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Teléfonos</a>
+    <a href="#evacuacion"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Evacuación</a>
+  </nav>
+</header>
+
+<main id="inicio">
+
+  <!-- ============ 0 · PORTADA / HERO ============ -->
+  <section class="hero">
+    <p class="lang-note" lang="en">Guía solo en español por ahora · <span>Available in English &amp; Valencià soon</span></p>
+    <h1>Aras de los Olmos está en zona de riesgo de incendio forestal.</h1>
+    <p class="hero-lead">Si vienes este verano, dedica <strong>3&nbsp;minutos</strong> a leer esto. Puede salvarte la vida a ti o a alguien más.</p>
+    <a class="btn-112 btn-112-hero" href="tel:112">
+      <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+      Emergencias: LLAMA AL 112
+    </a>
+
+    <div class="quick-select" aria-label="Acceso rápido según tu situación">
+      <h2>¿Qué te pasa ahora mismo?</h2>
+      <div class="quick-buttons">
+        <a class="quick-btn quick-btn-danger" href="#veo-humo">
+          <svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>
+          Veo humo o fuego
+        </a>
+        <a class="quick-btn" href="#monte">
+          <svg class="icon" aria-hidden="true"><use href="#i-trees"/></svg>
+          Estoy en el monte
+        </a>
+        <a class="quick-btn" href="#coche">
+          <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+          Estoy en casa o en el coche
+        </a>
+      </div>
+    </div>
+
+    <div class="context-box">
+      <p><strong>Dato de contexto</strong> (Ministerio del Interior): en España se producen de media unos <strong>17.000 incendios forestales al año</strong>, la mayoría menores de 1&nbsp;hectárea, y unos 80 al año llegan a afectar a la población.</p>
+      <p>Aras de los Olmos (comarca de Los Serranos, Valencia, 936&nbsp;m de altitud) tiene importante superficie forestal alrededor del casco urbano. El ayuntamiento ha ejecutado obras de prevención (limpieza de caminos forestales, biotrituradora) dentro del programa REACCIONA de la Diputación de Valencia.</p>
+    </div>
+  </section>
+
+  <!-- ============ 1 · ANTES DE VENIR ============ -->
+  <section id="antes">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Antes de venir / antes de salir de casa</h2>
+    <ul class="card-list checklist">
+      <li>Consulta el nivel de preemergencia PREVIFOC del día en <a href="https://www.112cv.gva.es" rel="noopener">www.112cv.gva.es</a>.</li>
+      <li><strong>Si el nivel es 3 (extremo):</strong> prohibido encender fuego en el monte y en 500&nbsp;m alrededor, transitar campo a través o por senderos forestales, hacer obras en terreno forestal, usar pirotecnia y circular por pistas forestales con vehículo, bici o a pie en parques naturales.</li>
+      <li>Lleva el móvil cargado; en zonas de sierra la cobertura puede fallar.</li>
+      <li>Si vas de excursión, dile a alguien tu ruta y hora prevista de vuelta.</li>
+      <li>Evita fuego, barbacoas o fumar en el monte en días de viento, calor fuerte o sequía.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 2 · QUÉ NO HACER ============ -->
+  <section id="no-hacer" class="section-alert">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg>Qué NO hacer nunca</h2>
+    <ul class="ban-list">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span><strong>PROHIBIDO</strong> encender fuego en el monte con ninguna finalidad, ni siquiera hogueras pequeñas.</span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span>No tires colillas ni cerillas encendidas, ni por la ventanilla del coche.</span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span>No abandones botellas, cristales o basura: pueden actuar como lupa o foco de ignición.</span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span>No hagas quemas de rastrojos o restos vegetales sin autorización. En la Comunitat Valenciana está <strong>prohibida con carácter general</strong> la quema de rastrojos y restos agrícolas o forestales <strong>del 1 de julio al 30 de septiembre</strong>, y siempre que se declare nivel&nbsp;3 de preemergencia, aunque tengas autorización previa.</span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span>No uses pirotecnia, cohetes ni artefactos con llama en el monte o su zona de influencia.</span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><span>No uses maquinaria que genere chispas (desbrozadoras, soldadura) en días de riesgo alto sin medidas de seguridad.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ 3 · PRINCIPIOS GENERALES ============ -->
+  <section id="reglas" class="section-rules">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Principios generales de supervivencia</h2>
+    <p class="section-sub">Las reglas de oro. Valen en cualquier situación.</p>
+    <ol class="golden-rules">
+      <li>Tu vida vale más que cualquier pertenencia.</li>
+      <li>Evacúa pronto: cuanto antes salgas, más opciones tienes.</li>
+      <li>Nunca intentes atravesar las llamas.</li>
+      <li>El fuego se mueve muy rápido, especialmente cuesta arriba.</li>
+      <li>El humo mata: se muere muchas más veces por inhalación de humo que por quemaduras. Reduce siempre tu exposición.</li>
+      <li>El oxígeno puede disminuir en zonas muy próximas a un incendio intenso, y eso también afecta a tu capacidad de pensar con claridad.</li>
+      <li>Mantente informado mediante el 112, las autoridades y los servicios de emergencia.</li>
+      <li>No bloquees carreteras utilizadas por bomberos y equipos de emergencia: si evacuas en coche, deja vía libre y prioridad a los vehículos de emergencia.</li>
+      <li>Si puedes elegir, viste ropa protectora: manga larga, pantalón largo, calzado cerrado y tejidos naturales (el sintético puede fundirse sobre la piel).</li>
+      <li>Conserva la calma y piensa antes de actuar: las decisiones automáticas de pánico (correr sin rumbo, volver a por objetos) son las que más vidas cuestan.</li>
+    </ol>
+  </section>
+
+  <!-- ============ 4 · SI VEO HUMO O FUEGO ============ -->
+  <section id="veo-humo" class="section-critical">
+    <p class="critical-tag"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>URGENTE · La sección más importante</p>
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg>Si veo humo o fuego</h2>
+
+    <div class="big-step">
+      <span class="step-num" aria-hidden="true">1</span>
+      <div>
+        <h3>Llama al 112 inmediatamente</h3>
+        <p>Es el único número que necesitas recordar; ellos derivan el aviso a bomberos, agentes forestales, Guardia Civil o sanidad según haga falta. <strong>No cuelgues hasta que el operador te lo indique.</strong></p>
+        <a class="btn-112" href="tel:112"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>LLAMAR AL 112</a>
+      </div>
+    </div>
+
+    <div class="big-step">
+      <span class="step-num" aria-hidden="true">2</span>
+      <div>
+        <h3>Da tu ubicación con la máxima precisión posible</h3>
+        <div class="location-box">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-locate"/></svg>Cómo dar tu ubicación</h4>
+          <ul>
+            <li>Si tienes cobertura de datos, <strong>activa la ubicación del móvil</strong>: el sistema del 112 puede geolocalizar la llamada con un margen de 15-20&nbsp;metros si el GPS del teléfono está activado.</li>
+            <li>Describe también <strong>referencias verbales claras</strong>: nombre del paraje o camino (por ejemplo «Camino de la Puebla», «Camino del Molino de las Toscas», «Camino de Bercolón»...), kilómetro de carretera o pista si lo sabes, punto cardinal respecto al pueblo, y elementos visibles (antena, depósito de agua, corral, línea eléctrica).</li>
+            <li>Si usas apps de coordenadas (Google Maps, What3Words, GPS del móvil), <strong>léelas al operador letra por letra</strong>.</li>
+            <li>Indica <strong>color y dirección del humo</strong>, si ves llama, y si hay viento y en qué dirección sopla.</li>
+          </ul>
+          <div class="gps-tool">
+            <button type="button" id="gps-copy" class="btn-gps">
+              <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+              Copiar mis coordenadas GPS
+            </button>
+            <output id="gps-result" aria-live="polite"></output>
+            <p class="gps-hint">El navegador te pedirá permiso para acceder a tu ubicación: acéptalo. Las coordenadas se copian listas para leerlas por teléfono.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-step">
+      <span class="step-num" aria-hidden="true">3</span>
+      <div>
+        <h3>Mientras esperas ayuda</h3>
+        <ul class="card-list">
+          <li>Si el fuego es <strong>muy pequeño e incipiente</strong> y puedes hacerlo con seguridad, intenta apagarlo (agua, tierra, pisotones), priorizando siempre tu seguridad. Si ya tiene entidad, aléjate en dirección contraria al humo, respirando por la nariz y cubriéndote la boca con un paño húmedo.</li>
+          <li>No busques refugio en zonas profundas de vegetación; huye siempre <strong>cuesta abajo</strong>.</li>
+          <li><strong>No intentes cruzar las llamas:</strong> puedes quedar atrapado.</li>
+          <li>Si el fuego te alcanza, sitúate en <strong>zona ya quemada</strong>, a espaldas del viento dominante.</li>
+          <li>Si se prende tu ropa, <strong>no corras</strong>: échate a rodar por el suelo, o cúbrete con una manta.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5 · EN EL MONTE A PIE ============ -->
+  <section id="monte">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-trees"/></svg>Si estoy en el monte a pie y el incendio está cerca</h2>
+    <ul class="card-list">
+      <li>Observa constantemente la <strong>dirección del viento</strong>: puede cambiar y con ella la dirección del fuego.</li>
+      <li>Identifica siempre <strong>varias rutas de escape</strong> antes de que las necesites, no solo una.</li>
+      <li>Aléjate de la vegetación muy densa.</li>
+      <li>No confíes en que el fuego avanzará despacio: puede <strong>acelerar de golpe</strong> con un cambio de viento o de pendiente.</li>
+      <li>Mantén el teléfono cargado y, si vas quedando aislado, comunica tu posición cuanto antes.</li>
+      <li>Si te ves atrapado, busca la zona con <strong>menor carga de combustible vegetal</strong>: zonas ya quemadas, amplias superficies sin vegetación o construcciones resistentes si son seguras.</li>
+      <li>Pasa a zona ya quemada <strong>por los laterales</strong>, apartándote de por donde avanza el fuego, buscando ladera abajo la cola del incendio.</li>
+      <li>Si el fuego te rodea, permanece en terreno sin vegetación o ya quemado; <strong>no corras ladera arriba</strong> salvo que sepas que hay un lugar seguro.</li>
+      <li>Si te ves cercado, protégete de la radiación <strong>tumbándote detrás de una roca grande, un tronco o una depresión del terreno</strong>, cubriéndote si puedes con algo no inflamable.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 6 · TERRENO PELIGROSO ============ -->
+  <section id="terreno" class="section-terrain">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-ravine"/></svg>Terreno peligroso: barrancos, vaguadas, collados y laderas</h2>
+    <p class="section-sub">Peligro del terreno, no solo del fuego directo. Aquí el fuego corre más que tú.</p>
+
+    <figure class="slope-diagram">
+      <svg viewBox="0 0 640 300" role="img" aria-labelledby="slope-title slope-desc">
+        <title id="slope-title">El fuego sube mucho más rápido por una ladera que en llano</title>
+        <desc id="slope-desc">Esquema comparativo: en terreno llano el fuego avanza despacio; en una ladera o barranco las llamas se inclinan sobre la pendiente y suben muy deprisa, como por una chimenea.</desc>
+        <!-- llano -->
+        <line x1="20" y1="240" x2="290" y2="240" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M60 240 q-8 -22 4 -34 q-2 14 10 20 q6 -8 4 -16 q14 12 8 30 z" fill="var(--alert)"/>
+        <path d="M110 236 l44 0" stroke="var(--alert)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M154 236 l-10 -7 m10 7 l-10 7" stroke="var(--alert)" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <text x="150" y="278" text-anchor="middle" class="diagram-label">EN LLANO: más lento</text>
+        <!-- ladera -->
+        <line x1="350" y1="240" x2="620" y2="60" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M395 212 q-16 -30 2 -48 q-4 20 14 26 q8 -12 4 -24 q22 18 12 46 q-6 12 -18 12 q-10 0 -14 -12 z" fill="var(--danger)"/>
+        <path d="M430 190 L530 122" stroke="var(--danger)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M530 122 l-16 -2 m16 2 l-6 15" stroke="var(--danger)" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M470 210 L560 150" stroke="var(--danger)" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+        <path d="M560 150 l-13 -2 m13 2 l-5 12" stroke="var(--danger)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.55"/>
+        <text x="480" y="278" text-anchor="middle" class="diagram-label diagram-label-danger">CUESTA ARRIBA: mucho más rápido</text>
+      </svg>
+      <figcaption>El aire caliente asciende: en laderas y barrancos las llamas «corren» pendiente arriba como por una chimenea.</figcaption>
+    </figure>
+
+    <ul class="card-list">
+      <li><strong>Barrancos y vaguadas actúan como chimenea.</strong> El aire caliente asciende y arrastra las llamas hacia arriba mucho más rápido que en terreno llano; un barranco puede pasar de tener humo a tener fuego corriendo por dentro en segundos. <strong>Nunca lo uses como vía de escape ni bajes a su fondo para «refugiarte»:</strong> el calor y el humo se concentran ahí.</li>
+      <li><strong>El fuego sube laderas mucho más rápido de lo que sube una persona.</strong> Si ves fuego por debajo de ti en una ladera, no confíes en la distancia: aléjate en horizontal o busca terreno ya quemado, no intentes «ganarle» subiendo.</li>
+      <li><strong>Los collados y puertos aceleran y cambian el viento</strong>, generando ráfagas repentinas y cambios bruscos de dirección del fuego. Evita quedarte parado en un collado si hay un incendio activo cerca.</li>
+      <li>Antes de salir de excursión, <strong>evita rutas que obliguen a cruzar barrancos</strong> o zonas de vegetación densa sin salida alternativa, y ten identificado un punto de escape hacia zona abierta o ya quemada.</li>
+      <li>Si ves un barranco entre tú y el fuego, <strong>no des por hecho que te protege</strong>: el fuego puede saltarlo por el aire (pavesas) o subir por el lado opuesto y salir por arriba mucho más deprisa de lo esperado.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 7 · EN EL COCHE ============ -->
+  <section id="coche">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-car"/></svg>Si estoy conduciendo y me rodea el humo o el fuego</h2>
+    <ul class="card-list">
+      <li><strong>No conduzcas a ciegas a través de humo denso:</strong> enciende luces e intermitentes.</li>
+      <li>Si tienes que parar, busca un lugar <strong>sin vegetación alrededor</strong>, detén el motor, cierra ventanillas y rejillas de ventilación, y agáchate dentro del coche.</li>
+      <li>Si tienes que salir del vehículo, <strong>cubre la mayor parte de tu piel posible</strong>.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 8 · EN CASA O CASA DE CAMPO ============ -->
+  <section id="casa">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Si estoy en una vivienda o casa de campo cercana a un incendio</h2>
+    <div class="two-cols">
+      <div class="col-card">
+        <h3>Antes · prevención</h3>
+        <ul class="card-list">
+          <li>No quemes hojas ni restos vegetales en días de calor o viento, y nunca sin autorización.</li>
+          <li>Mantén limpios de vegetación los caminos de acceso a la vivienda.</li>
+          <li>Mantén limpios los tejados de materiales combustibles (hojas, ramas secas).</li>
+          <li>Conoce de antemano las vías de evacuación de tu zona.</li>
+          <li>Es recomendable contar con un plan de actuación propio si vives de forma habitual en zona de monte.</li>
+          <li>La normativa autonómica recomienda mantener una <strong>franja de 25&nbsp;metros libre de vegetación baja</strong> alrededor de las edificaciones, con el arbolado podado hasta 2/3 de su altura, y caminos de acceso con 5&nbsp;metros libres más una franja adicional de protección de 10&nbsp;metros a cada lado.</li>
+        </ul>
+      </div>
+      <div class="col-card col-card-during">
+        <h3>Durante · si el fuego se acerca</h3>
+        <ul class="card-list">
+          <li>Si hay <strong>orden de evacuación</strong> de la autoridad, síguela; si no la hay, en general es <strong>más seguro quedarse dentro de la casa</strong> que huir a través de caminos afectados por el fuego.</li>
+          <li>Entra en la vivienda y <strong>cierra puertas, ventanas y persianas</strong> para evitar corrientes de aire y la entrada de llamas.</li>
+          <li>Tapona con paños mojados las rendijas al exterior.</li>
+          <li>Desconecta los suministros (gas, electricidad).</li>
+          <li>Si tienes manguera, déjala abierta y dirigida hacia el tejado, y moja también los alrededores.</li>
+          <li>No arrojes agua sobre zonas donde pueda haber cables eléctricos.</li>
+          <li>Si el riesgo es inminente y no has podido evacuar, <strong>llama al 112</strong> y comunica tu situación exacta (dirección, número de personas, si hay menores, mayores o personas con movilidad reducida).</li>
+          <li><strong>Nunca intentes huir atravesando caminos ya afectados por el fuego.</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9 · COMPORTAMIENTO DEL FUEGO ============ -->
+  <section id="fuego">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg>Comprende a tu enemigo: el comportamiento del fuego</h2>
+    <div class="fire-grid">
+      <div class="fire-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg>
+        <h3>Viento</h3>
+        <p>Aporta oxígeno y proyecta llamas y brasas a distancia, aumentando la velocidad de propagación.</p>
+      </div>
+      <div class="fire-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-slope"/></svg>
+        <h3>Pendiente</h3>
+        <p>El fuego sube mucho más rápido por las laderas que en llano.</p>
+      </div>
+      <div class="fire-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg>
+        <h3>Combustible</h3>
+        <p>Cuanta más vegetación seca haya acumulada, más intenso y rápido es el incendio.</p>
+      </div>
+      <div class="fire-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-heat"/></svg>
+        <h3>Calor radiante</h3>
+        <p>El calor que emite el fuego puede encender vegetación cercana sin necesidad de contacto directo con la llama.</p>
+      </div>
+      <div class="fire-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-shuffle"/></svg>
+        <h3>Cambios bruscos de dirección</h3>
+        <p>Pueden sorprender a cualquiera; el fuego es imprevisible, sobre todo en terreno de barrancos y collados (<a href="#terreno">ver sección de terreno</a>).</p>
+      </div>
+      <div class="fire-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-smoke"/></svg>
+        <h3>Humo y falta de oxígeno</h3>
+        <p>En incendios intensos, el humo y el calor consumen oxígeno: desorientación, pérdida de consciencia. Es la principal causa de muerte en incendios forestales.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 · ERRORES FRECUENTES ============ -->
+  <section id="errores" class="section-alert">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Errores frecuentes que cuestan vidas</h2>
+    <div class="errors-grid">
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Esperar «a ver qué pasa» en vez de actuar o evacuar pronto.</p></div>
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Volver a por objetos personales una vez iniciada la evacuación.</p></div>
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Conducir hacia el humo sin visibilidad.</p></div>
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Refugiarse bajo árboles (arden y además pueden desprender ramas).</p></div>
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Intentar apagar un incendio ya grande con medios domésticos (cubos, mangueras de jardín) en vez de avisar y alejarse.</p></div>
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Quedarse grabando vídeos de la situación cuando lo que toca es evacuar.</p></div>
+      <div class="error-card"><svg class="icon" aria-hidden="true"><use href="#i-ban"/></svg><p>Separarse del grupo con el que se estaba.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 11 · ECLIPSE 2026 ============ -->
+  <section id="eclipse" class="section-eclipse">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-eclipse"/></svg>Si vienes a ver el eclipse solar del 12 de agosto de 2026</h2>
+    <p>El 12 de agosto de 2026, al atardecer (en torno a las 20:30h), se producirá el <strong>primer eclipse solar total visible desde la península en más de un siglo</strong>, y pasará por gran parte de la Comunitat Valenciana. Aras de los Olmos, por sus cielos oscuros y su tradición de turismo astronómico (observatorios, Reserva de la Biosfera), es probable que reciba ese día bastante gente buscando un buen sitio para verlo hacia el oeste. Esto coincide justo con el <strong>periodo de mayor riesgo de incendio del año</strong>, así que ten en cuenta también:</p>
+    <ul class="card-list">
+      <li><strong>No aparques el coche sobre hierba seca o vegetación:</strong> el calor del tubo de escape o del catalizador puede iniciar un incendio en minutos, incluso después de apagar el motor.</li>
+      <li><strong>Los telescopios, prismáticos y cámaras con teleobjetivo actúan como una lupa gigante</strong> si se dejan montados y apuntando al sol sin vigilancia: no los abandones desatendidos, pueden prender la vegetación seca de alrededor.</li>
+      <li>Si buscas un mirador en altura o una zona despejada para ver el eclipse, <strong>consulta antes el nivel de preemergencia del día</strong> (<a href="#niveles">ver niveles de riesgo</a>) y evita zonas de acceso complicado o barrancos donde, si hay fuego, sea difícil salir rápido.</li>
+      <li>Si os quedáis hasta la noche para acampar o para ver las Perseidas, <strong>no hagáis fuego ni uséis pirotecnia</strong> para celebrar el momento: seguimos en pleno verano y en zona forestal.</li>
+      <li>Si vais en grupo, <strong>acordad un punto de encuentro</strong> y no os disperséis sin avisar.</li>
+      <li>Usa siempre <strong>gafas de observación solar homologadas (norma ISO 12312-2)</strong>: no es un tema de incendios, pero ya que estás aquí por el eclipse, cuida también tu vista.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 12 · NIVELES PREVIFOC ============ -->
+  <section id="niveles">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Niveles de riesgo (PREVIFOC) y dónde consultarlos</h2>
+    <div class="levels-table" role="table" aria-label="Niveles de preemergencia PREVIFOC">
+      <div class="level-row level-1" role="row">
+        <span class="level-badge" role="cell">NIVEL 1<small>Baja-Media</small></span>
+        <span role="cell">Vigilancia preventiva estándar.</span>
+      </div>
+      <div class="level-row level-2" role="row">
+        <span class="level-badge" role="cell">NIVEL 2<small>Alta</small></span>
+        <span role="cell">Mayor vigilancia, precaución reforzada.</span>
+      </div>
+      <div class="level-row level-3" role="row">
+        <span class="level-badge" role="cell">NIVEL 3<small>Extrema</small></span>
+        <span role="cell"><strong>Prohibiciones obligatorias</strong> — no encender fuego en el monte ni en 500&nbsp;m alrededor, no transitar senderos ni campo a través, se suspenden obras, actividades deportivas y autorizaciones de quema ya concedidas.</span>
+      </div>
+    </div>
+    <p><strong>Consulta diaria:</strong> <a href="https://www.112cv.gva.es" rel="noopener">www.112cv.gva.es</a> (apartado «Riesgo incendios forestales», mapa por colores) y <a href="https://prevencionincendiosgva.es" rel="noopener">prevencionincendiosgva.es</a>.</p>
+  </section>
+
+  <!-- ============ 13 · TELÉFONOS ============ -->
+  <section id="telefonos">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Teléfonos y contactos útiles</h2>
+    <div class="phones-grid">
+      <a class="phone-card phone-card-112" href="tel:112">
+        <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+        <strong>112</strong>
+        <span>Emergencias: incendio, rescate, cualquier urgencia</span>
+      </a>
+      <a class="phone-card" href="tel:+34962102001">
+        <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+        <strong>962 10 20 01</strong>
+        <span>Ayuntamiento de Aras de los Olmos · Plaza del Ayuntamiento, 6 · info@arasdelosolmos.es</span>
+      </a>
+      <a class="phone-card" href="tel:062">
+        <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+        <strong>062</strong>
+        <span>Guardia Civil</span>
+      </a>
+      <div class="phone-card phone-card-info">
+        <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+        <strong>Agentes Medioambientales / SEPRONA</strong>
+        <span>A través del 112 o del 062</span>
+      </div>
+    </div>
+    <div class="pending-box">
+      <p><strong>PENDIENTE DE CONFIRMAR POR EL AYUNTAMIENTO:</strong> teléfono de Protección Civil local, punto de encuentro/refugio designado, y contacto de la agrupación de voluntarios si existe.</p>
+    </div>
+  </section>
+
+  <!-- ============ 14 · VÍAS DE EVACUACIÓN ============ -->
+  <section id="evacuacion">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Vías de evacuación y puntos de encuentro</h2>
+    <div class="pending-box pending-box-big">
+      <p><strong>PENDIENTE DE CONFIRMAR POR EL AYUNTAMIENTO</strong> con el Plan de Autoprotección o Plan Local de Emergencias del municipio (si existe). Como mínimo debería incluir:</p>
+      <ul>
+        <li>Mapa con las salidas del casco urbano hacia zonas ya despejadas o carreteras principales.</li>
+        <li>Punto o puntos de encuentro seguros en caso de evacuación.</li>
+        <li>Qué caminos <strong>NO</strong> usar en caso de fuego activo (Camino Melchora-Navarejo, Camino Hoya de Tomás, Camino de la Burguesa, Camino de las Casas del Marqués, Camino de Bercolón, Camino de la Fuente del Rebollo, Camino de la Puebla, Camino del Molino de las Toscas, Camino del Collado, Camino de los Tornajos, según cuál esté afectado).</li>
+      </ul>
+    </div>
+    <div class="map-embed">
+      <p class="map-note">Mapa de referencia (OpenStreetMap, requiere conexión). El ayuntamiento puede sustituirlo por el plano oficial de evacuación:</p>
+      <iframe title="Mapa de Aras de los Olmos (OpenStreetMap)" loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-1.1055%2C39.9436%2C-1.0255%2C39.9936&amp;layer=mapnik&amp;marker=39.9686%2C-1.0655"></iframe>
+      <p class="map-note"><a href="https://www.openstreetmap.org/?mlat=39.9686&amp;mlon=-1.0655#map=14/39.9686/-1.0655" rel="noopener">Ver mapa más grande en OpenStreetMap</a></p>
+    </div>
+  </section>
+
+  <!-- ============ 15 · NORMATIVA Y FUENTES ============ -->
+  <section id="normativa" class="section-small">
+    <h2><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>Normativa y fuentes</h2>
+    <h3>Normativa de referencia</h3>
+    <ul>
+      <li>Real Decreto 893/2013, Directriz Básica de Planificación de Protección Civil de Emergencia por Incendios Forestales.</li>
+      <li>Real Decreto 524/2023, Norma Básica de Protección Civil.</li>
+      <li>Ley 3/1993, Forestal de la Comunitat Valenciana, y su reglamento (Decreto 98/1995).</li>
+      <li>Decreto 163/1998, Plan Especial frente al Riesgo de Incendios Forestales de la Comunitat Valenciana (PEIF).</li>
+      <li>Consulta de planes autonómicos: <a href="http://www.proteccioncivil.es/bdplanes/index.php" rel="noopener">proteccioncivil.es/bdplanes</a></li>
+    </ul>
+    <h3>Fuentes utilizadas</h3>
+    <ul>
+      <li>Ministerio del Interior, Dirección General de Protección Civil y Emergencias — «Guía de información al ciudadano ante el riesgo de incendios forestales».</li>
+      <li>112 Comunitat Valenciana — <a href="https://www.112cv.gva.es" rel="noopener">www.112cv.gva.es</a>.</li>
+      <li><a href="https://prevencionincendiosgva.es" rel="noopener">prevencionincendiosgva.es</a> (Generalitat Valenciana).</li>
+      <li>Ayuntamiento de Aras de los Olmos — <a href="https://www.arasdelosolmos.es" rel="noopener">www.arasdelosolmos.es</a>.</li>
+      <li>AEMET — mapas de peligro de incendio.</li>
+      <li>Instituto Geográfico Nacional (IGN) — información oficial del eclipse solar total del 12 de agosto de 2026.</li>
+      <li>Infografía «Incendios forestales: principios generales de supervivencia» (@luz_prepper, Aras de los Olmos), usada como referencia de contenido para principios generales, comportamiento del fuego y errores frecuentes.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Guía informativa para visitantes · Sin carácter oficial hasta validación municipal.</p>
+  <p>Funciona sin conexión después de la primera visita. Emergencias: <a href="tel:112">112</a>.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
